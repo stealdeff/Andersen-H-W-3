@@ -2,10 +2,12 @@
 // All values from the object's from property to the to property must be traversed one by one. (if to < from - an error should occur).
 // If to or from is not specified OR to or from are not numbers, an error should occur.
 
-const myIterable = { from: 's', to: 4 };
+const myIterable = { from: 10, to: 9 };
 myIterable[Symbol.iterator]=function (){
     if(typeof(this.from)==='number' && typeof(this.to)==='number')
-    {
+    {if (this.to < this.from) {
+        throw new Error('Error!');
+    }
   const rangeArr=Array.from({length:1+this.to-this.from},(_,i)=>this.from+i)
   return rangeArr[Symbol.iterator]()
     }
